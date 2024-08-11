@@ -4,6 +4,7 @@ import { getKeypairFromFile } from '@solana-developers/helpers'
 async function main() {
 	const senderFile = process.argv[2];
 	const recieverFile  = process.argv[3];
+	const LAMPORTS_TO_SEND = process.argv[4] ? Number(process.argv[4]) : 5000;
 	if (!senderFile || !recieverFile) {
 		throw new Error("No Arguments");
 	}
@@ -27,7 +28,6 @@ async function main() {
 	const transaction = new web3.Transaction();
 	
 	// Create Instruction
-	const LAMPORTS_TO_SEND = 175031;
 	const instruction = web3.SystemProgram.transfer({
 		fromPubkey: senderKeypair.publicKey,
 		toPubkey: recieverPubkey,
